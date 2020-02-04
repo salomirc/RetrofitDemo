@@ -29,17 +29,22 @@ class MainActivity : AppCompatActivity() {
 
 //                val results = getPostsVM()
 //                val results = getCommentsVM(3)
-                val results = getCommentsVM(3)
+//                val results = getCommentsVM(3)
+//                val results = getPostUserIdVM(4)
+//                val results = getPostMulti(mapOf("userId" to "1", "_sort" to "id", "_order" to "desc"))
+//                val results = getCommentsUrlVM("post/3/comments")
+                val results = getCommentsUrlVM("https://jsonplaceholder.typicode.com/post/3/comments")
+//                val results = getPostMulti(4, "null", "null")
 //                val results = getCommentOkHttp("https://jsonplaceholder.typicode.com/posts/3/comments")
 
                 progressBar.visibility = View.INVISIBLE
                 if (results != null) {
-//                    val sb: StringBuilder = StringBuilder()
-//                    for (item in results) {
-//                        sb.append(item.toString())
-//                    }
-//                    resultTextView.text = sb.toString()
-                    resultTextView.text = results[0].toString()
+                    val sb: StringBuilder = StringBuilder()
+                    for (item in results) {
+                        sb.append(item.toString())
+                    }
+                    resultTextView.text = sb.toString()
+//                    resultTextView.text = results[0].toString()
                 }
                 else{
                     resultTextView.text = "Network Error"
@@ -97,9 +102,33 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private suspend fun getPostUserIdVM(id: Int) : List<Post>? {
+        return withContext(Dispatchers.IO){
+            RequestHelper.getPostUserId(id)
+        }
+    }
+
+//    private suspend fun getPostMulti(userId: List<Int>, sort: String, order: String) : List<Post>? {
+//        return withContext(Dispatchers.IO){
+//            RequestHelper.getPostMulti(userId, sort, order)
+//        }
+//    }
+
+    private suspend fun getPostMulti(parameters: Map<String, String>) : List<Post>? {
+        return withContext(Dispatchers.IO){
+            RequestHelper.getPostMulti(parameters)
+        }
+    }
+
     private suspend fun getCommentsVM(postId: Int) : List<Comment>? {
         return withContext(Dispatchers.IO){
             RequestHelper.getComments(postId)
+        }
+    }
+
+    private suspend fun getCommentsUrlVM(url: String) : List<Comment>? {
+        return withContext(Dispatchers.IO){
+            RequestHelper.getCommentsURL(url)
         }
     }
 

@@ -22,7 +22,7 @@ object RequestHelper {
 
     private val retrofit = Retrofit.Builder()
         .client(okHttpClient)
-        .baseUrl("https://jsonplaceholder.typicode.com/")
+        .baseUrl("https://jsonplaceholder.typicode.com/") //must end with one "/" slash
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -40,9 +40,57 @@ object RequestHelper {
         return null
     }
 
+    fun getPostUserId(userId: Int): List<Post>?{
+        try {
+            jsonPlaceHolderApi.getPostParamUserId(userId).execute().let { response ->
+                if (response.isSuccessful) return response.body()
+            }
+        }
+        catch (e: Exception){
+            println("Exception : ${e.message}")
+        }
+        return null
+    }
+
+//    fun getPostMulti(userId: List<Int>, sort: String, order: String): List<Post>?{
+////        try {
+////            jsonPlaceHolderApi.getPostParamMulti(userId, sort, order).execute().let { response ->
+////                if (response.isSuccessful) return response.body()
+////            }
+////        }
+////        catch (e: Exception){
+////            println("Exception : ${e.message}")
+////        }
+////        return null
+////    }
+
+    fun getPostMulti(parameters: Map<String, String>): List<Post>?{
+        try {
+            jsonPlaceHolderApi.getPostParamMulti(parameters).execute().let { response ->
+                if (response.isSuccessful) return response.body()
+            }
+        }
+        catch (e: Exception){
+            println("Exception : ${e.message}")
+        }
+        return null
+    }
+
     fun getComments(postId: Int): List<Comment>?{
         try {
             jsonPlaceHolderApi.getComments(postId).execute().let { response ->
+                if (response.isSuccessful) return response.body()
+            }
+        }
+        catch (e: Exception){
+            println("Exception : ${e.message}")
+        }
+        return null
+    }
+
+    fun getCommentsURL(url: String): List<Comment>?{
+        try {
+            jsonPlaceHolderApi.getCommentsURL(url).execute().let { response ->
                 if (response.isSuccessful) return response.body()
             }
         }

@@ -3,14 +3,50 @@ package com.example.retrofitdemo.api
 import com.example.retrofitdemo.models.Comment
 import com.example.retrofitdemo.models.Post
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface JsonPlaceHolderApi {
 
     @GET("posts")
     fun getPost() : Call<List<Post>>
 
+//    //override the base URL
+//    @GET("https://jsonplaceholder.typicode.com/posts")
+//    fun getPost() : Call<List<Post>>
+
+    @GET("posts")
+    fun getPostParamUserId(@Query("userId") userId: Int) : Call<List<Post>>
+
+//    @GET("posts")
+//    fun getPostParamMulti(
+//        @Query("userId") userId: Int,
+//        @Query("_sort") sort: String,
+//        @Query("_order") order: String
+//    ) : Call<List<Post>>
+
+//    @GET("posts")
+//    fun getPostParamMulti(
+//        @Query("userId") userId: Int,
+//        @Query("userId") userId2: Int,
+//        @Query("_sort") sort: String,
+//        @Query("_order") order: String
+//    ) : Call<List<Post>>
+
+//    @GET("posts")
+//    fun getPostParamMulti(
+//        @Query("userId") userId: List<Int>,
+//        @Query("_sort") sort: String,
+//        @Query("_order") order: String
+//    ) : Call<List<Post>>
+
+    @GET("posts")
+    fun getPostParamMulti(@QueryMap parameters: Map<String, String>) : Call<List<Post>>
+
+    @GET
+    fun getCommentsURL(@Url url: String) : Call<List<Comment>>
+
     @GET("posts/{id}/comments")
     fun getComments(@Path("id") postId: Int) : Call<List<Comment>>
+
+
 }
