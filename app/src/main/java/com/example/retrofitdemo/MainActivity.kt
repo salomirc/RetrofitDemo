@@ -28,12 +28,12 @@ class MainActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
 
 //                val results = getPostsVM()
-//                val results = getCommentsVM(3)
+                val results = getCommentsVM(3)
 //                val results = getCommentsVM(3)
 //                val results = getPostUserIdVM(4)
 //                val results = getPostMulti(mapOf("userId" to "1", "_sort" to "id", "_order" to "desc"))
 //                val results = getCommentsUrlVM("post/3/comments")
-                val results = getCommentsUrlVM("https://jsonplaceholder.typicode.com/post/3/comments")
+//                val results = getCommentsUrlVM("https://jsonplaceholder.typicode.com/post/3/comments")
 //                val results = getPostMulti(4, "null", "null")
 //                val results = getCommentOkHttp("https://jsonplaceholder.typicode.com/posts/3/comments")
 

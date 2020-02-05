@@ -1,5 +1,6 @@
 package com.example.retrofitdemo.api
 
+import com.example.retrofitdemo.BuildConfig
 import com.example.retrofitdemo.models.Comment
 import com.example.retrofitdemo.models.Post
 import com.google.gson.Gson
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit
 
 object RequestHelper {
 
+    private val baseUrl: String = BuildConfig.BASE_URL
     private val client = OkHttpClient()
     private val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(2, TimeUnit.MINUTES)
@@ -22,7 +24,8 @@ object RequestHelper {
 
     private val retrofit = Retrofit.Builder()
         .client(okHttpClient)
-        .baseUrl("https://jsonplaceholder.typicode.com/") //must end with one "/" slash
+//        .baseUrl("https://jsonplaceholder.typicode.com/") //must end with one "/" slash
+        .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
