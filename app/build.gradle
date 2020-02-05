@@ -23,11 +23,18 @@ android {
             keyAlias "ebskey"
             keyPassword "ebs2015"
         }
+        debug {
+            storeFile file('C:\\Users\\ciprian.salomir\\Documents\\KSB\\keys\\new\\release.keystore.jks')
+            storePassword 'RedHat0099!!'
+            keyAlias = 'key1'
+            keyPassword 'RedHat'
+        }
     }
 
     buildTypes {
         debug {
             minifyEnabled false
+            signingConfig signingConfigs.debug
             buildConfigField "String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\""
         }
         release {

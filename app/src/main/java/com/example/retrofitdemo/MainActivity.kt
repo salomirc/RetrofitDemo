@@ -27,8 +27,9 @@ class MainActivity : AppCompatActivity() {
             progressBar.visibility = View.VISIBLE
             CoroutineScope(Dispatchers.Main).launch {
 
+                  val results: String? = null
 //                val results = getPostsVM()
-                val results = getCommentsVM(3)
+//                val results = getCommentsVM(3)
 //                val results = getCommentsVM(3)
 //                val results = getPostUserIdVM(4)
 //                val results = getPostMulti(mapOf("userId" to "1", "_sort" to "id", "_order" to "desc"))
@@ -36,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 //                val results = getCommentsUrlVM("https://jsonplaceholder.typicode.com/post/3/comments")
 //                val results = getPostMulti(4, "null", "null")
 //                val results = getCommentOkHttp("https://jsonplaceholder.typicode.com/posts/3/comments")
+
+                val objectResult = createPost(Post(23, "New Title", "New Text"))
 
                 progressBar.visibility = View.INVISIBLE
                 if (results != null) {
@@ -45,6 +48,9 @@ class MainActivity : AppCompatActivity() {
                     }
                     resultTextView.text = sb.toString()
 //                    resultTextView.text = results[0].toString()
+                }
+                else if (objectResult != null){
+                    resultTextView.text = objectResult.toString()
                 }
                 else{
                     resultTextView.text = "Network Error"
@@ -135,6 +141,12 @@ class MainActivity : AppCompatActivity() {
     private suspend fun getCommentOkHttp(urlString: String) : List<Comment>? {
         return withContext(Dispatchers.IO){
             RequestHelper.getCommentOkHttp(urlString)
+        }
+    }
+
+    private suspend fun createPost(post: Post) : Post? {
+        return withContext(Dispatchers.IO){
+            RequestHelper.createPost(post)
         }
     }
 }

@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit
 
 object RequestHelper {
 
-    private val baseUrl: String = BuildConfig.BASE_URL
     private val client = OkHttpClient()
     private val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(2, TimeUnit.MINUTES)
@@ -25,7 +24,7 @@ object RequestHelper {
     private val retrofit = Retrofit.Builder()
         .client(okHttpClient)
 //        .baseUrl("https://jsonplaceholder.typicode.com/") //must end with one "/" slash
-        .baseUrl(baseUrl)
+        .baseUrl(BuildConfig.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -94,6 +93,18 @@ object RequestHelper {
     fun getCommentsURL(url: String): List<Comment>?{
         try {
             jsonPlaceHolderApi.getCommentsURL(url).execute().let { response ->
+                if (response.isSuccessful) return response.body()
+            }
+        }
+        catch (e: Exception){
+            println("Exception : ${e.message}")
+        }
+        return null
+    }
+
+    fun createPost(post: Post): Post? {
+        try {
+            jsonPlaceHolderApi.createPost(post).execute().let { response ->
                 if (response.isSuccessful) return response.body()
             }
         }

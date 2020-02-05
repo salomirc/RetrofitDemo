@@ -48,5 +48,8 @@ interface JsonPlaceHolderApi {
     @GET("posts/{id}/comments")
     fun getComments(@Path("id") postId: Int) : Call<List<Comment>>
 
+    @POST("posts")
+    fun createPost(@Body post: Post) : Call<Post>
+
 
 }
