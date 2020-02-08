@@ -16,30 +16,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    signingConfigs {
-        release {
-            storeFile file('C:\\Users\\ciprian.salomir\\Documents\\KSB\\keys\\release.keystore.jks')
-            storePassword "ebs2015"
-            keyAlias "ebskey"
-            keyPassword "ebs2015"
-        }
-        debug {
-            storeFile file('C:\\Users\\ciprian.salomir\\Documents\\KSB\\keys\\new\\release.keystore.jks')
-            storePassword 'RedHat0099!!'
-            keyAlias = 'key1'
-            keyPassword 'RedHat'
-        }
-    }
-
     buildTypes {
         debug {
             minifyEnabled false
-            signingConfig signingConfigs.debug
-            buildConfigField "String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\""
+//            buildConfigField "String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\""
+            buildConfigField "String", "BASE_URL", "\"http://193.239.219.51/idontknowmypump/\""
         }
         release {
             minifyEnabled false
-            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "BASE_URL", "\"https://release.typicode.com/\""
         }

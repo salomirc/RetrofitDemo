@@ -3,6 +3,7 @@ package com.example.retrofitdemo.api
 import com.example.retrofitdemo.BuildConfig
 import com.example.retrofitdemo.models.Comment
 import com.example.retrofitdemo.models.Post
+import com.example.retrofitdemo.models.SeriesTypePump
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.OkHttpClient
@@ -30,7 +31,19 @@ object RequestHelper {
 
     private val jsonPlaceHolderApi: JsonPlaceHolderApi by lazy { retrofit.create(JsonPlaceHolderApi::class.java) }
 
-    fun getPost(): List<Post>?{
+//    fun getPost(): List<Post>?{
+//        try {
+//            jsonPlaceHolderApi.getPost().execute().let { response ->
+//                if (response.isSuccessful) return response.body()
+//            }
+//        }
+//        catch (e: Exception){
+//            println("Exception : ${e.message}")
+//        }
+//        return null
+//    }
+
+    fun getPost(): List<String>?{
         try {
             jsonPlaceHolderApi.getPost().execute().let { response ->
                 if (response.isSuccessful) return response.body()
@@ -41,6 +54,30 @@ object RequestHelper {
         }
         return null
     }
+
+    fun getPost(freq: String): List<String>?{
+        try {
+            jsonPlaceHolderApi.getPost(freq).execute().let { response ->
+                if (response.isSuccessful) return response.body()
+            }
+        }
+        catch (e: Exception){
+            println("Exception : ${e.message}")
+        }
+        return null
+    }
+
+//        fun getPost(freq: String, brand: String): SeriesTypePump?{
+//        try {
+//            jsonPlaceHolderApi.getPost(freq, brand).execute().let { response ->
+//                if (response.isSuccessful) return response.body()
+//            }
+//        }
+//        catch (e: Exception){
+//            println("Exception : ${e.message}")
+//        }
+//        return null
+//    }
 
     fun getPostUserId(userId: Int): List<Post>?{
         try {

@@ -2,17 +2,36 @@ package com.example.retrofitdemo.api
 
 import com.example.retrofitdemo.models.Comment
 import com.example.retrofitdemo.models.Post
+import com.example.retrofitdemo.models.SeriesTypePump
 import retrofit2.Call
 import retrofit2.http.*
 
 interface JsonPlaceHolderApi {
 
-    @GET("posts")
-    fun getPost() : Call<List<Post>>
+//    @GET("posts")
+//    fun getPost() : Call<List<Post>>
+
+    @GET("frequencies")
+    fun getPost() : Call<List<String>>
+
+    @GET("brandsByFreq")
+    fun getPost(
+        @Query("freq") freq: String
+    ) : Call<List<String>>
+
+//    @GET("getSeriesAndPumpTypes")
+//    fun getPost(
+//        @Query("freq") freq: String,
+//        @Query("brand") brand: String
+//    ) : Call<SeriesTypePump>
 
 //    //override the base URL
 //    @GET("https://jsonplaceholder.typicode.com/posts")
 //    fun getPost() : Call<List<Post>>
+
+//    //override the base URL
+//    @GET("http://193.239.219.51/idontknowmypump/frequencies")
+//    fun getPost() : Call<List<String>>
 
     @GET("posts")
     fun getPostParamUserId(@Query("userId") userId: Int) : Call<List<Post>>

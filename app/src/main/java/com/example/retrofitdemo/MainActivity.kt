@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.retrofitdemo.api.RequestHelper
 import com.example.retrofitdemo.models.Comment
 import com.example.retrofitdemo.models.Post
+import com.example.retrofitdemo.models.SeriesTypePump
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +29,8 @@ class MainActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
 
                   val results: String? = null
-//                val results = getPostsVM()
+                val objectResult = getPostsVM()
+//                val objectResult = getPostsVM("50")
 //                val results = getCommentsVM(3)
 //                val results = getCommentsVM(3)
 //                val results = getPostUserIdVM(4)
@@ -38,7 +40,9 @@ class MainActivity : AppCompatActivity() {
 //                val results = getPostMulti(4, "null", "null")
 //                val results = getCommentOkHttp("https://jsonplaceholder.typicode.com/posts/3/comments")
 
-                val objectResult = createPost(Post(23, "New Title", "New Text"))
+
+//                val objectResult = null
+//                val objectResult = createPost(Post(23, "New Title", "New Text"))
 
                 progressBar.visibility = View.INVISIBLE
                 if (results != null) {
@@ -102,9 +106,21 @@ class MainActivity : AppCompatActivity() {
 //        return RequestHelper.getComments(postId)
 //    }
 
-    private suspend fun getPostsVM() : List<Post>? {
+//    private suspend fun getPostsVM() : List<Post>? {
+//        return withContext(Dispatchers.IO){
+//            RequestHelper.getPost()
+//        }
+//    }
+
+    private suspend fun getPostsVM() : List<String>? {
         return withContext(Dispatchers.IO){
             RequestHelper.getPost()
+        }
+    }
+
+    private suspend fun getPostsVM(freq: String) : List<String>? {
+        return withContext(Dispatchers.IO){
+            RequestHelper.getPost(freq)
         }
     }
 
