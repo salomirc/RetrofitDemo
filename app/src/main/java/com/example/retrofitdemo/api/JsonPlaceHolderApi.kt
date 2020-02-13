@@ -1,8 +1,10 @@
 package com.example.retrofitdemo.api
 
 import com.example.retrofitdemo.models.Comment
+import com.example.retrofitdemo.models.IKnowPumpSearchModel
 import com.example.retrofitdemo.models.Post
 import com.example.retrofitdemo.models.SeriesTypePump
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -11,10 +13,10 @@ interface JsonPlaceHolderApi {
 //    @GET("posts")
 //    fun getPost() : Call<List<Post>>
 
-    @GET("frequencies")
+    @GET("idontknowmypump/frequencies")
     fun getPost() : Call<List<String>>
 
-    @GET("brandsByFreq")
+    @GET("idontknowmypump/brandsByFreq")
     fun getPost(
         @Query("freq") freq: String
     ) : Call<List<String>>
@@ -70,5 +72,8 @@ interface JsonPlaceHolderApi {
     @POST("posts")
     fun createPost(@Body post: Post) : Call<Post>
 
-
+    @POST("iknowmypump/search")
+    fun postIKnowMyPumpSearch(
+        @Body body: RequestBody
+    ) : Call<List<IKnowPumpSearchModel>>
 }

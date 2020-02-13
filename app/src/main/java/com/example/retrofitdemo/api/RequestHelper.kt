@@ -2,12 +2,14 @@ package com.example.retrofitdemo.api
 
 import com.example.retrofitdemo.BuildConfig
 import com.example.retrofitdemo.models.Comment
+import com.example.retrofitdemo.models.IKnowPumpSearchModel
 import com.example.retrofitdemo.models.Post
-import com.example.retrofitdemo.models.SeriesTypePump
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -142,6 +144,26 @@ object RequestHelper {
     fun createPost(post: Post): Post? {
         try {
             jsonPlaceHolderApi.createPost(post).execute().let { response ->
+                if (response.isSuccessful) return response.body()
+            }
+        }
+        catch (e: Exception){
+            println("Exception : ${e.message}")
+        }
+        return null
+    }
+
+    fun postIKnowMyPumpSearch(parameters: Map<String, String>): List<IKnowPumpSearchModel>? {
+        try {
+            val requestBody: RequestBody = MultipartBody.Builder()
+                .setType(MultipartBody.FORM).apply {
+                    for (item in parameters){
+                        this.addFormDataPart(item.key, item.value)
+                    }
+                }
+                .build()
+
+            jsonPlaceHolderApi.postIKnowMyPumpSearch(requestBody).execute().let { response ->
                 if (response.isSuccessful) return response.body()
             }
         }

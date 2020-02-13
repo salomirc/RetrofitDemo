@@ -20,7 +20,7 @@ android {
         debug {
             minifyEnabled false
 //            buildConfigField "String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\""
-            buildConfigField "String", "BASE_URL", "\"http://193.239.219.51/idontknowmypump/\""
+            buildConfigField "String", "BASE_URL", "\"http://193.239.219.51/\""
         }
         release {
             minifyEnabled false

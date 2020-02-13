@@ -28,8 +28,11 @@ class MainActivity : AppCompatActivity() {
             progressBar.visibility = View.VISIBLE
             CoroutineScope(Dispatchers.Main).launch {
 
-                  val results: String? = null
-                val objectResult = getPostsVM()
+//                  val results: String? = null
+                val results =  withContext(Dispatchers.IO){
+                    RequestHelper.postIKnowMyPumpSearch(mapOf("searchString" to "XYLEM"))
+                }
+//                val objectResult = getPostsVM()
 //                val objectResult = getPostsVM("50")
 //                val results = getCommentsVM(3)
 //                val results = getCommentsVM(3)
@@ -41,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 //                val results = getCommentOkHttp("https://jsonplaceholder.typicode.com/posts/3/comments")
 
 
-//                val objectResult = null
+                val objectResult = null
 //                val objectResult = createPost(Post(23, "New Title", "New Text"))
 
                 progressBar.visibility = View.INVISIBLE
